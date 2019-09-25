@@ -3,14 +3,14 @@ import React, { Component } from "react";
 // import contacts from "./contacts.json";
 import "./App.css";
 import ContactTable from "./ContactTable";
-import RandomButton from "./RandomButton";
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <h1>IronContacts</h1>
-        <RandomButton />
+        
         <ContactTable />
       </div>
     );

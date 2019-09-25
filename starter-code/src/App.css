@@ -42,3 +42,7 @@
   height: 50px;
   width: auto;
 }
+
+.button-div {
+  display: flex;
+}

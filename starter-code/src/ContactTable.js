@@ -13,15 +13,27 @@ class ContactTable extends React.Component {
     let randomContact = contacts[Math.floor(Math.random() * contacts.length)];
     //Update state
     this.setState({
-      slicedContacts: this.state.slicedContacts.concat(randomContact)
+      //   slicedContacts: this.state.slicedContacts.concat(randomContact)
+      //   Alternative:
+      slicedContacts: [...this.state.slicedContacts, randomContact]
     });
   };
 
   //   //FUNCTIONALITY OF FILTER-BY-NAME-BUTTON
+  //   filterName = () => {
+  //     let nameSorted = [...this.state.slicedContacts].sort((a, b) =>
+  //       a.name.localeCompare(b.name)
+  //     );
+  //     this.setState({
+  //       slicedContacts: nameSorted
+  //     });
+  //   };
+  // Same as above
   filterName = () => {
-    let nameSorted = [...this.state.slicedContacts].sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
+    let nameSorted = [...this.state.slicedContacts];
+    nameSorted.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
     this.setState({
       slicedContacts: nameSorted
     });
@@ -39,12 +51,17 @@ class ContactTable extends React.Component {
 
   //FUNCTIONALITY OF DELETE-BUTTON
 
-  //   deleteContact = () => {
-  //     let deletedContact = [...this.state.slicedContacts].filter();
-  //     this.setState({
-  //       slicedContacts: popularitySorted
-  //     });
-  //   };
+  deleteContact = id => {
+    //remove an element from this.state.contacts using setState
+    // console.log(id);
+    const filtered = this.state.slicedContacts.filter(el => {
+      return el.id !== id;
+    });
+
+    this.setState({
+      slicedContacts: filtered
+    });
+  };
 
   render() {
     const ironContacts = this.state.slicedContacts.map(el => {
@@ -57,7 +74,7 @@ class ContactTable extends React.Component {
           <td>{el.name}</td>
           <td>{Math.round(el.popularity * 100) / 100}</td>
           <td>
-            <button onClick={this.deleteContact}>Delete</button>
+            <button onClick={() => this.deleteContact(el.id)}>Delete</button>
           </td>
         </tr>
       );
@@ -76,6 +93,7 @@ class ContactTable extends React.Component {
                 <th>Picture</th>
                 <th>Name</th>
                 <th>Popularity</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>{ironContacts}</tbody>

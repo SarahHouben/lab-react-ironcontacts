@@ -18,7 +18,7 @@ const ContactTable = props => {
     );
   });
 
-  //   console.log(ironContacts[0].name);
+  const slicedContacts = ironContacts.slice(0, 5);
 
   return (
     <div className="contact-table">
@@ -30,7 +30,7 @@ const ContactTable = props => {
             <th>Popularity</th>
           </tr>
         </thead>
-        <tbody>{ironContacts}</tbody>
+        <tbody>{slicedContacts}</tbody>
       </table>
     </div>
   );
